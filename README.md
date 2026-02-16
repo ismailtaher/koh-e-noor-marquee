@@ -1,6 +1,6 @@
-# Airbnb Management Dubai
+# Koh-e-noor maquee
 
-A modern, responsive landing page for an Airbnb property management service in Dubai.
+A modern, responsive landing page for an events marquee in Sialkot.
 
 ## Features
 

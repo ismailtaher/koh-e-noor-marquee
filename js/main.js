@@ -288,13 +288,13 @@ if (contactForm) {
     const phone = document
       .querySelector('input[placeholder="Phone Number"]')
       .value.trim();
-    const service = document.querySelector('select[name="service"]').value;
+    const event = document.querySelector('select[name="event"]').value;
     const message = document
-      .querySelector('textarea[placeholder="Your Message"]')
+      .querySelector('textarea[placeholder="Tell us about your event"]')
       .value.trim();
 
     // Check if values are being picked up
-    console.log({ name, phone, service, message });
+    console.log({ name, phone, event, message });
 
     const phoneNumber = "923218894983"; // Replace with your actual WhatsApp number
 
@@ -302,7 +302,7 @@ if (contactForm) {
       `*New Inquiry from Website*\n\n` +
       `*Name:* ${name}\n` +
       `*Phone:* ${phone}\n` +
-      `*Service:* ${service}\n` +
+      `*Event:* ${event}\n` +
       `*Message:* ${message}`;
 
     openWhatsApp(phoneNumber, fullMessage);

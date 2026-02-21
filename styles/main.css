@@ -480,6 +480,12 @@ h3 {
   width: calc(100% / 3);
 }
 
+/* Remove blue tap highlight on mobile */
+.wrapper i,
+.carousel img {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .carousel img:first-child {
   margin-left: 0px;
 }

@@ -339,10 +339,10 @@ const carousel = document.querySelector(".carousel");
 const firstImage = carousel.querySelector("img");
 const arrowIcons = document.querySelectorAll(".wrapper i");
 // Variables for state management
-let isDragging = false;
-let startX = 0;
-let scrollStart = 0;
-let scrollDiff = 0;
+// let isDragging = false;
+// let startX = 0;
+// let scrollStart = 0;
+// let scrollDiff = 0;
 // Helper function to toggle arrow visibility
 const toggleArrowIcons = () => {
   setTimeout(() => {
@@ -367,46 +367,76 @@ arrowIcons.forEach((icon) => {
   });
 });
 // Automatic adjustment after dragging
-const autoCenterImage = () => {
-  const cardWidth = firstImage.clientWidth + 14;
-  const offset = carousel.scrollLeft % cardWidth;
-  const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-  if (carousel.scrollLeft > 0 && carousel.scrollLeft < maxScroll) {
-    if (offset > cardWidth / 3) {
-      carousel.scrollLeft += cardWidth - offset; // Snap to the next image
-    } else {
-      carousel.scrollLeft -= offset; // Snap to the previous image
-    }
-  }
-  toggleArrowIcons();
-};
+// const autoCenterImage = () => {
+//   const cardWidth = firstImage.clientWidth + 14;
+//   const offset = carousel.scrollLeft % cardWidth;
+//   const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+//   if (carousel.scrollLeft > 0 && carousel.scrollLeft < maxScroll) {
+//     if (offset > cardWidth / 3) {
+//       carousel.scrollLeft += cardWidth - offset; // Snap to the next image
+//     } else {
+//       carousel.scrollLeft -= offset; // Snap to the previous image
+//     }
+//   }
+//   toggleArrowIcons();
+// };
 // Dragging logic
-const startDragging = (event) => {
-  isDragging = true;
-  startX = event.pageX || event.touches[0].pageX;
-  scrollStart = carousel.scrollLeft;
-  carousel.classList.add("dragging");
-};
-const duringDrag = (event) => {
-  if (!isDragging) return;
-  const currentX = event.pageX || event.touches[0].pageX;
-  scrollDiff = currentX - startX;
-  carousel.scrollLeft = scrollStart - scrollDiff;
-};
-const stopDragging = () => {
-  if (!isDragging) return;
-  isDragging = false;
-  carousel.classList.remove("dragging");
-  if (Math.abs(scrollDiff) > 10) {
-    autoCenterImage();
-  }
-};
+// const startDragging = (event) => {
+//   isDragging = true;
+//   startX = event.pageX || event.touches[0].pageX;
+//   scrollStart = carousel.scrollLeft;
+//   carousel.classList.add("dragging");
+// };
+// const duringDrag = (event) => {
+//   if (!isDragging) return;
+//   const currentX = event.pageX || event.touches[0].pageX;
+//   scrollDiff = currentX - startX;
+//   carousel.scrollLeft = scrollStart - scrollDiff;
+// };
+// const stopDragging = () => {
+//   if (!isDragging) return;
+//   isDragging = false;
+//   carousel.classList.remove("dragging");
+//   if (Math.abs(scrollDiff) > 10) {
+//     autoCenterImage();
+//   }
+// };
 // Attach event listeners
-carousel.addEventListener("mousedown", startDragging);
-carousel.addEventListener("touchstart", startDragging);
-document.addEventListener("mousemove", duringDrag);
-carousel.addEventListener("touchmove", duringDrag);
-document.addEventListener("mouseup", stopDragging);
-carousel.addEventListener("touchend", stopDragging);
+// carousel.addEventListener("mousedown", startDragging);
+// carousel.addEventListener("touchstart", startDragging);
+// document.addEventListener("mousemove", duringDrag);
+// carousel.addEventListener("touchmove", duringDrag);
+// document.addEventListener("mouseup", stopDragging);
+// carousel.addEventListener("touchend", stopDragging);
 // Initial setup
 toggleArrowIcons();
+
+// image modal
+
+const images = document.querySelectorAll(".carousel img");
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImg");
+const closeBtn = document.querySelector(".close-modal");
+
+images.forEach(img => {
+  img.addEventListener("click", () => {
+    modal.style.display = "flex";
+    modalImg.src = img.src;
+    document.body.style.overflow = "hidden";
+  });
+});
+
+const closeModal = () => {
+  modal.style.display = "none";
+  document.body.style.overflow = "auto";
+};
+
+closeBtn.addEventListener("click", closeModal);
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) closeModal();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeModal();
+});
